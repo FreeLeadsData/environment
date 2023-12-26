@@ -1,11 +1,11 @@
 # create a new user 'blackstack'
-sudo adduser blackstack
+#sudo adduser blackstack
 
 # add blackstack to sudoers
-sudo usermod -aG sudo blackstack
+#sudo usermod -aG sudo blackstack
 
 # switch to the new user
-sudo su - blackstack
+#sudo su - blackstack
 
 # update packages
 echo "update packages"

@@ -1,6 +1,28 @@
-# environment
+# Environment
 
 Scripts for installing the environment for any of my projects on different Linux distros and version.
+
+## Getting Started
+
+Before running any installation script, you should create a `blackstack` user from where you will start any software process.
+
+1. Create a new user `blackstack`:
+
+```bash
+sudo adduser blackstack
+```
+
+2. Add `blackstack` to `sudoers`:
+
+```bash
+sudo usermod -aG sudo blackstack
+```
+
+3. Switch to the new `blackstack` user:
+
+```bash
+sudo su - blackstack
+```
 
 ## Installation Scripts
 
