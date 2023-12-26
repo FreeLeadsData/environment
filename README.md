@@ -30,6 +30,12 @@ sudo usermod -aG sudo blackstack
 sudo su - blackstack
 ```
 
+Additonally, you may want to change the `hostname` of a new server (e.g.: `n01`):
+
+```bash
+hostname n01
+```
+
 ## Installation Scripts
 
 Anyone of the installation scripts listed below should run from the `blackstack` user created in the [Getting Started](#getting-started) section.
