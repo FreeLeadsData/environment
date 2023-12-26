@@ -1,5 +1,6 @@
 # environment
-Scripts for installing nevironment on different Linux distros and version.
+
+Scripts for installing the environment for any of my projects on different Linux distros and version.
 
 ## Installation Scripts
 
