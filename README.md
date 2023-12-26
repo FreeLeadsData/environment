@@ -6,17 +6,13 @@ Scripts for installing nevironment on different Linux distros and version.
 **Ubunto 18.04:**
 
 ```bash
-wget https://raw.githubusercontent.com/FreeLeadsData/environment/main/sh/install.ubuntu.18-04.sh
-
-bash install.ubuntu.18-04.sh
+wget https://raw.githubusercontent.com/leandrosardi/environment/main/sh/install.ubuntu.18_04.sh -O - | sh
 ```
 
 **Ubunto 20.04:**
 
 ```bash
-wget https://raw.githubusercontent.com/FreeLeadsData/environment/main/sh/install.ubuntu.20-04.sh
-
-bash install.ubuntu.20-04.sh
+wget https://raw.githubusercontent.com/leandrosardi/environment/main/sh/install.ubuntu.20_04.sh -O - | bash
 ```
 
 ## Docker Images
