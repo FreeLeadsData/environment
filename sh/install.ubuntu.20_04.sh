@@ -59,7 +59,7 @@ echo
 echo "Run RVM script"
 #source /home/blackstack/.rvm/scripts/rvm
 #source /usr/local/rvm/scripts/rvm
-sudo /bin/dash /etc/profile.d/rvm.sh
+source /etc/profile.d/rvm.sh
 type rvm | head -n 1 # if you read "rvm is a function, that means the installation is fine.
 
 # install and run Ruby 3.1.2
