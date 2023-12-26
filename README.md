@@ -43,13 +43,15 @@ Anyone of the installation scripts listed below should run from the `blackstack`
 **Ubunto 18.04:**
 
 ```bash
-wget https://raw.githubusercontent.com/leandrosardi/environment/main/sh/install.ubuntu.18_04.sh -O - | sh
+wget https://raw.githubusercontent.com/leandrosardi/environment/main/sh/install.ubuntu.18_04.sh
+bash install.ubuntu.18_04.sh
 ```
 
 **Ubunto 20.04:**
 
 ```bash
-wget https://raw.githubusercontent.com/leandrosardi/environment/main/sh/install.ubuntu.20_04.sh -O - | bash
+wget https://raw.githubusercontent.com/leandrosardi/environment/main/sh/install.ubuntu.20_04.sh
+bash install.ubuntu.20_04.sh
 ```
 
 ## Docker Images
