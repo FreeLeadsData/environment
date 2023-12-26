@@ -65,48 +65,4 @@ rvm --default use 3.1.2
 # check ruby installed
 ruby -v
 
-# install git
-echo "install git"
-sudo apt install -y git
 
-# backup old .postgresql folder
-echo "backup old .postgresql folder"
-sudo mv -p ~/.postgresql ~/.postgresql.$(date +%s) > /dev/null 2>&1
-sudo mkdir -p ~/.postgresql
-
-# install PostgreSQL dev package with header of PostgreSQL
-echo "install PostgreSQL dev package with header of PostgreSQL"
-sudo apt-get install -y libpq-dev
-sudo apt install -y postgresql postgresql-contrib
-sudo systemctl start postgresql.service
-sudo systemctl status postgresql
-
-# install bundler
-echo "install bundler"
-gem install bundler -v '2.3.7'
-
-# Install Google Chrome
-# Reference:
-# - https://skolo.online/documents/webscrapping/#step-1-download-chrome
-#
-echo "install chrome"
-wget http://mirror.cs.uchicago.edu/google-chrome/pool/main/g/google-chrome-stable/google-chrome-stable_114.0.5735.90-1_amd64.deb
-sudo dpkg -i google-chrome-stable_114.0.5735.90-1_amd64.deb
-sudo apt-get install -fy
-google-chrome --version
-
-# Install Chrome Driver
-# Reference:
-# - https://stackoverflow.com/questions/50642308/webdriverexception-unk
-#
-echo "install chrome-driver"
-wget https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
-unzip chromedriver_linux64.zip
-sudo mv chromedriver /usr/bin/chromedriver
-sudo chown blackstack:blackstack /usr/bin/chromedriver
-sudo chmod +x /usr/bin/chromedriver
-
-# create the code directory
-echo "create the code directory"
-mkdir -p ~/code
-cd ~/code
