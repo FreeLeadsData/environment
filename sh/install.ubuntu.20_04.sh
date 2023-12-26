@@ -63,6 +63,7 @@ sudo /bin/dash /etc/profile.d/rvm.sh
 type rvm | head -n 1 # if you read "rvm is a function, that means the installation is fine.
 
 # install and run Ruby 3.1.2
+# reference: https://superuser.com/questions/376669/why-am-i-getting-rvm-command-not-found-on-ubuntu
 echo
 echo "install Ruby 3.1.2"
 rvmsudo rvm install 3.1.2
