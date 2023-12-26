@@ -71,6 +71,11 @@ sudo mv chromedriver /usr/bin/chromedriver
 sudo chown blackstack:blackstack /usr/bin/chromedriver
 sudo chmod +x /usr/bin/chromedriver
 
+# install git
+echo
+echo "install git"
+sudo apt install -y git
+
 # get private key for RVM
 echo
 echo "get private key for RVM"
@@ -119,11 +124,6 @@ rvm --default use 3.1.2
 echo
 echo "Try Ruby"
 ruby -v
-
-# install git
-echo
-echo "install git"
-sudo apt install -y git
 
 # create the code directory
 echo
