@@ -32,6 +32,8 @@ sudo su - blackstack
 
 ## Installation Scripts
 
+Anyone of the installation scripts listed below should run from the `blackstack` user created in the [Getting Started](#getting-started) section.
+
 **Ubunto 18.04:**
 
 ```bash
