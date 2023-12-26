@@ -33,7 +33,7 @@ sudo su - blackstack
 Additonally, you may want to change the `hostname` of a new server (e.g.: `n01`):
 
 ```bash
-hostname n01
+sudo hostname n01
 ```
 
 ## Installation Scripts

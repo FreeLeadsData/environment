@@ -50,22 +50,22 @@ sudo bash rvm.sh
 #
 # reference: https://unix.stackexchange.com/questions/102678/making-ruby-available-to-all-users
 #
-# UPDATE: This was necessary only when running the installation script as root.
-#
-#sudo usermod -a -G rvm blackstack
+sudo usermod -a -G rvm blackstack
 
 # To start using RVM you need to run `source /etc/profile.d/rvm.sh` in all your open shell windows,
 # Fix the issue "RVM is not a function"
 # reference: https://stackoverflow.com/questions/9336596/rvm-installation-not-working-rvm-is-not-a-function
 echo
 echo "Run RVM script"
-source /home/blackstack/.rvm/scripts/rvm
+#source /home/blackstack/.rvm/scripts/rvm
+#source /usr/local/rvm/scripts/rvm
+sudo /bin/dash /etc/profile.d/rvm.sh
 type rvm | head -n 1 # if you read "rvm is a function, that means the installation is fine.
 
 # install and run Ruby 3.1.2
 echo
 echo "install Ruby 3.1.2"
-rvm install 3.1.2
+rvmsudo rvm install 3.1.2
 
 # set 3.1.2 as default Ruby version
 echo
