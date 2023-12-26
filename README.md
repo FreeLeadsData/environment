@@ -2,6 +2,8 @@
 
 Scripts for installing the environment for any of my projects on different Linux distros and version.
 
+**Outline:**
+
 1. [Getting Started](#getting-started).
 2. [Installation Scripts](#installation-scripts).
 3. [Docker Images](#docker-images).
