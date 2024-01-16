@@ -110,6 +110,11 @@ echo "Run RVM script"
 source /etc/profile.d/rvm.sh
 type rvm | head -n 1 # if you read "rvm is a function, that means the installation is fine.
 
+# fix: 
+# Warning: can not check `/etc/sudoers` for `secure_path`, falling back to call via `/usr/bin/env`, this breaks rules from `/etc/sudoers`.
+# Run `export rvmsudo_secure_path=1` to avoid the warning, put it in shell initialization to make it persistent.
+export rvmsudo_secure_path=1
+
 # install and run Ruby 3.1.2
 # reference: https://superuser.com/questions/376669/why-am-i-getting-rvm-command-not-found-on-ubuntu
 echo
