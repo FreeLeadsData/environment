@@ -23,7 +23,7 @@ sudo apt install -y sshpass
 sudo apt install -y xterm
 sudo apt install -y bc
 sudo apt install -y unzip
-sudo apt install -t curl
+sudo apt install -y curl
 
 # install cockroach CLI for local development environments
 echo
