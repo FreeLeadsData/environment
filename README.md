@@ -5,8 +5,9 @@ Scripts for installing the environment for any of my projects on different Linux
 **Outline:**
 
 1. [Getting Started](#getting-started).
-2. [Installation Scripts](#installation-scripts).
-3. [Docker Images](#docker-images).
+2. [SSH Configuration](#ssh-configuration).
+3. [Installation Scripts](#installation-scripts).
+4. [Docker Images](#docker-images).
 
 ## Getting Started
 
