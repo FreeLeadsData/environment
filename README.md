@@ -36,6 +36,28 @@ Additonally, you may want to change the `hostname` of a new server (e.g.: `n01`)
 sudo hostname n01
 ```
 
+## SSH Configuration
+
+Additionally, be sure you will be able to connect via SSH using the `blackstack` user.
+
+1. Edit the `sshd_config` file.
+
+```bash
+sudo nano /etc/ssh/sshd_config
+```
+
+2. Allow password authentication.
+
+```bash
+PasswordAuthentication yes
+``` 
+
+3. Restart the SSH service.
+
+```bash
+sudo service ssh restart
+```
+
 ## Installation Scripts
 
 Anyone of the installation scripts listed below should run from the `blackstack` user created in the [Getting Started](#getting-started) section.
