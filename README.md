@@ -63,6 +63,8 @@ sudo service ssh restart
 
 Anyone of the installation scripts listed below should run from the `blackstack` user created in the [Getting Started](#getting-started) section.
 
+**IMPORTANT:** When the script has been done, log out SSH and access again to run the `profile.d` and get Ruby working.
+
 **Ubunto 18.04:**
 
 ```bash
