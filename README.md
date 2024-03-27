@@ -169,6 +169,13 @@ If you are going to create other databases, remeber to activate the **Show all d
 
 ![DBeaver Connection](./images/dbeaver02.png)
 
+### 4.7. Install Required Extensions
+
+```sql
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+```
+
+
 ## 5. Docker Images
 
 _(pending)_
