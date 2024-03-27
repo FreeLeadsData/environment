@@ -4,13 +4,13 @@ Scripts for installing the environment for any of my projects on different Linux
 
 **Outline:**
 
-1. [Getting Started](#getting-started).
-2. [SSH Configuration](#ssh-configuration).
-3. [Installation Scripts](#installation-scripts).
-4. [PostgreSQL](#postgresql).
-5. [Docker Images](#docker-images).
+1. [Getting Started](#1-getting-started).
+2. [SSH Configuration](#2-ssh-configuration).
+3. [Installation Scripts](#3-installation-scripts).
+4. [PostgreSQL](#4-postgresql).
+5. [Docker Images](#5-docker-images).
 
-## Getting Started
+## 1. Getting Started
 
 Before running any installation script, you should create a `blackstack` user from where you will start any software process.
 
@@ -38,7 +38,7 @@ Additonally, you may want to change the `hostname` of a new server (e.g.: `n01`)
 sudo hostname n01
 ```
 
-## SSH Configuration
+## 2. SSH Configuration
 
 Additionally, be sure you will be able to connect via SSH using the `blackstack` user.
 
@@ -60,7 +60,7 @@ PasswordAuthentication yes
 sudo service ssh restart
 ```
 
-## Installation Scripts
+## 3. Installation Scripts
 
 Anyone of the installation scripts listed below should run from the `blackstack` user created in the [Getting Started](#getting-started) section.
 
@@ -78,11 +78,11 @@ wget https://raw.githubusercontent.com/leandrosardi/environment/main/sh/install.
 wget https://raw.githubusercontent.com/leandrosardi/environment/main/sh/install.ubuntu.20_04.sh -O - | bash
 ```
 
-## PostgreSQL
+## 4. PostgreSQL
 
 Install and running a PostgreSQL database sevice.
 
-### 1. Database Instance
+### 4.1. Database Instance
 
 In the same `bash` terminal, create a new Postgres user with superuser rights.
 
@@ -97,7 +97,7 @@ Enter name of role to add: blackstack
 Shall the new role be a superuser? (y/n) y
 ```
 
-### 2. Database Password
+### 2.2. Database Password
 
 In the same `bash` terminal, access the **postgres** terminal.
 
@@ -111,7 +111,7 @@ And then run this **postgres** command to assign a new password to the **blackst
 \password blackstack
 ```
 
-### 3. Accepting Incoming Connections
+### 2.3. Edit `postgresql.conf`
 
 ```bash
 cd /etc/postgresql/9.x/main/
@@ -135,6 +135,8 @@ Also, increase the number of max allowed connections:
 max_connections = 250
 ```
 
+### 2.4. Edit `pg_hba.conf`
+
 Then open file named `pg_hba.conf`,
 
 ```bash
@@ -149,12 +151,20 @@ host  all  all 0.0.0.0/0 md5
 
 It allows access to all databases for all users with an encrypted password.
 
+### 2.5. Restart PostgreSQL
+
 Finally, restart your server
 
 ```
 sudo /etc/init.d/postgresql restart
 ```
 
-## Docker Images
+### 2.6. Try Connection
+
+Remember, connect to the `postgres` database in your new server.
+
+![DBeaver Connection](./images/dbeaver.png)
+
+## 5. Docker Images
 
 _(pending)_
