@@ -163,7 +163,11 @@ sudo /etc/init.d/postgresql restart
 
 Remember, connect to the `postgres` database in your new server.
 
-![DBeaver Connection](./images/dbeaver.png)
+![DBeaver Connection](./images/dbeaver01.png)
+
+If you are going to create other databases, remeber to activate the **Show all databases** checkbox in DBeaver.
+
+![DBeaver Connection](./images/dbeaver02.png)
 
 ## 5. Docker Images
 
