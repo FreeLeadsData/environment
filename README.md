@@ -5,27 +5,16 @@ Scripts for installing the environment for any of my projects on different Linux
 **Outline:**
 
 1. [Getting Started](#1-getting-started)
-
 2. [SSH Configuration](#2-ssh-configuration)
-
 3. [Installation Scripts](#3-installation-scripts)
-
-4. [PostgreSQL](#4-postgresql)
-    
-    4.1. [Database Instance](#41-database-instance)
-    
-    4.2. [Database Password](#42-database-password)
-    
-    4.3. [Edit postgresql.conf](#43-edit-postgresqlconf)
-    
-    4.4. [Edit pg_hba.conf](#44-edit-pg_hbaconf)
-    
-    4.5. [Restart PostgreSQL](#45-restart-postgresql)
-    
-    4.6. [Try Connection](#46-try-connection)
-    
-    4.7. [Install Required Extensions](#47-install-required-extensions)
-
+4. [PostgreSQL](#4-postgresql) 
+    - [Database Instance](#41-database-instance)
+    - [Database Password](#42-database-password)
+    - [Edit postgresql.conf](#43-edit-postgresqlconf)
+    - [Edit pg_hba.conf](#44-edit-pg_hbaconf)
+    - [Restart PostgreSQL](#45-restart-postgresql)
+    - [Try Connection](#46-try-connection)
+    - [Install Required Extensions](#47-install-required-extensions)
 5. [Docker Images](#5-docker-images)
 
 ## 1. Getting Started
