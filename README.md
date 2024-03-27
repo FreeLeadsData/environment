@@ -97,7 +97,7 @@ Enter name of role to add: blackstack
 Shall the new role be a superuser? (y/n) y
 ```
 
-### 2.2. Database Password
+### 4.2. Database Password
 
 In the same `bash` terminal, access the **postgres** terminal.
 
@@ -111,7 +111,7 @@ And then run this **postgres** command to assign a new password to the **blackst
 \password blackstack
 ```
 
-### 2.3. Edit `postgresql.conf`
+### 4.3. Edit `postgresql.conf`
 
 ```bash
 cd /etc/postgresql/9.x/main/
@@ -135,7 +135,7 @@ Also, increase the number of max allowed connections:
 max_connections = 250
 ```
 
-### 2.4. Edit `pg_hba.conf`
+### 4.4. Edit `pg_hba.conf`
 
 Then open file named `pg_hba.conf`,
 
@@ -151,7 +151,7 @@ host  all  all 0.0.0.0/0 md5
 
 It allows access to all databases for all users with an encrypted password.
 
-### 2.5. Restart PostgreSQL
+### 4.5. Restart PostgreSQL
 
 Finally, restart your server
 
@@ -159,7 +159,7 @@ Finally, restart your server
 sudo /etc/init.d/postgresql restart
 ```
 
-### 2.6. Try Connection
+### 4.6. Try Connection
 
 Remember, connect to the `postgres` database in your new server.
 
