@@ -129,22 +129,22 @@ and add this line to that file
 listen_addresses = '*'
 ```
 
+Also, increase the number of max allowed connections:
+
+```
+max_connections = 250
+```
+
 Then open file named `pg_hba.conf`,
 
 ```bash
-sudo vi pg_hba.conf
+sudo nano pg_hba.conf
 ```
 
 and add this line to that file:
 
 ```
 host  all  all 0.0.0.0/0 md5
-```
-
-Also, increase the number of max allowed connections:
-
-```
-max_connections = 250
 ```
 
 It allows access to all databases for all users with an encrypted password.
