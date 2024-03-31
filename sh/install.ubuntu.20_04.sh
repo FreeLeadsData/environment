@@ -1,15 +1,16 @@
+# install.ubuntu.20_04.sh
+# Description:
+# - This script is used to install the required packages for the BlackStack project.
+# Parameters:
+# - $1: linux user blackstack password
+# - $2: postgres user blackstack password
+#
+
+# remember to run this script with sudo 
+echo 
+echo "remember to run this script with sudo"
 bash --login
-echo 'SantoBartolo101' | sudo -S echo "HOLA!"
-
-## -------------------------------------------
-sshpass -p "SantoBartolo101" ssh -l blackstack@89.116.25.250 
-sshpass -p "SantoBartolo101" ssh -o StrictHostKeyChecking=no blackstack@89.116.25.250 
-sshpass -p "SantoBartolo101" ssh -o StrictHostKeyChecking=no blackstack@89.116.25.250 'bash -s' < environment/sh/install.ubuntu.20_04.sh
-
-## -------------------------------------------
-
-#bash --login
-#sudo sshpass -p "SantoBartolo101" su - blackstack
+echo "$1" | sudo -S echo "HOLA!"
 
 # update packages
 echo
@@ -72,7 +73,7 @@ sudo systemctl status postgresql
 #wget https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
 #unzip chromedriver_linux64.zip
 #sudo mv chromedriver /usr/bin/chromedriver
-#sudo chown root:root /usr/bin/chromedriver
+#sudo chown blackstack:blackstack /usr/bin/chromedriver
 #sudo chmod +x /usr/bin/chromedriver
 
 # install git
@@ -101,15 +102,13 @@ sudo bash rvm.sh
 #
 # reference: https://unix.stackexchange.com/questions/102678/making-ruby-available-to-all-users
 #
-sudo usermod -a -G rvm root
+sudo usermod -a -G rvm blackstack
 
 # To start using RVM you need to run `source /etc/profile.d/rvm.sh` in all your open shell windows,
 # Fix the issue "RVM is not a function"
 # reference: https://stackoverflow.com/questions/9336596/rvm-installation-not-working-rvm-is-not-a-function
 echo
 echo "Run RVM script"
-#source /home/root/.rvm/scripts/rvm
-#source /usr/local/rvm/scripts/rvm
 source /etc/profile.d/rvm.sh
 type rvm | head -n 1 # if you read "rvm is a function, that means the installation is fine.
 
@@ -181,7 +180,7 @@ sudo wget https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/116.0.5845
 sudo chmod 777 chromedriver-linux64.zip
 unzip chromedriver-linux64.zip
 sudo mv chromedriver-linux64/* /usr/bin
-sudo chown root:root /usr/bin/chromedriver
+sudo chown blackstack:blackstack /usr/bin/chromedriver
 sudo chmod +x /usr/bin/chromedriver
 sudo rm -rf ./chromedriver-linux64.zip
 sudo rm -rf ./chromedriver-linux64
@@ -195,14 +194,12 @@ sudo apt-get update
 sudo apt-get install -y xvfb
 
 # setup postgresql
-useradd -m postgres
-cd /home/postgres
 sudo -u postgres createuser -s -i -d -r -l -w blackstack
-sudo -u postgres psql -c "ALTER ROLE blackstack WITH PASSWORD 'mysecretpassword';"
+sudo -u postgres psql -c "ALTER ROLE blackstack WITH PASSWORD '$2';"
 # edit /etc/postgresql/12/main/postgresql.sql: uncomment the line starting listen_addresses and set the velue listen_addresses='*'
 sudo sed -i 's/#listen_addresses/listen_addresses/g' /etc/postgresql/12/main/postgresql.conf
 sudo sed -i "s/listen_addresses = 'localhost'/listen_addresses = '*'/g" /etc/postgresql/12/main/postgresql.conf
 # edit /etc/postgresql/12/main/pg_hba.conf: add the line host all all
-sudo echo "host all all" >> /etc/postgresql/12/main/pg_hba.conf
+echo "host all all" >> /etc/postgresql/12/main/pg_hba.conf
 # restart postgresql
 sudo systemctl restart postgresql.service
