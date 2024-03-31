@@ -17,24 +17,24 @@ then
     exit 1
 fi
 
-# raise exception of $1 is empty
+# raise exception of $2 is empty
 if [ -z "$2" ]
 then
     echo "Parameter \$2 is empty"
     exit 1
 fi
 
-echo "Password: $1"
-echo "Hostname: $2"
+echo "Hostname: $1"
+echo "Password: $2"
 
 # add user with password
-useradd -p $(openssl passwd -1 $1) blackstack
+useradd -p $(openssl passwd -1 $2) blackstack
 
 # add blackstack to sudoers
 usermod -aG sudo blackstack
 
 # change hostname
-hostname $2
+hostname $1
 
 # edit /etc/ssh/sshd_config, enable the line "PasswordAuthentication yes"
 sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/g' /etc/ssh/sshd_config
@@ -80,7 +80,7 @@ sudo systemctl restart postgresql.service
 # create postgresql user
 sudo -u postgres createuser -s -i -d -r -l -w blackstack
 # assign password to the user blackstack
-sudo -u postgres psql -c "ALTER ROLE blackstack WITH PASSWORD '$1';"
+sudo -u postgres psql -c "ALTER ROLE blackstack WITH PASSWORD '$2';"
 # create new database called blackstack and owned by the user blackstack
 sudo -u postgres createdb -O blackstack blackstack
 
