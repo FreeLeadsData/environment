@@ -20,7 +20,7 @@ sudo apt install -y net-tools
 sudo apt install -y gnupg2
 sudo apt install -y nginx
 sudo apt install -y sshpass
-sudo apt install -y xterm
+#sudo apt install -y xterm
 sudo apt install -y bc
 sudo apt install -y unzip
 sudo apt install -y curl
