@@ -60,7 +60,7 @@ echo "install PostgreSQL dev package with header of PostgreSQL"
 sudo apt-get install -y libpq-dev
 sudo apt install -y postgresql-12 postgresql-contrib
 sudo systemctl start postgresql.service
-sudo systemctl status postgresql
+#sudo systemctl status postgresql
 
 # edit /etc/postgresql/12/main/postgresql.sql: uncomment the line starting listen_addresses and set the velue listen_addresses='*'
 sudo sed -i 's/#listen_addresses/listen_addresses/g' /etc/postgresql/12/main/postgresql.conf
