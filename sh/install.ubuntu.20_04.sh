@@ -3,6 +3,7 @@
 # - This script is used to install the required packages for the BlackStack project.
 # Parameters:
 # - $1: password for linux user blackstack, and postgres user blackstack either.
+# - $2: hostname for the server.
 #
 
 # remember to run this script with sudo 
@@ -16,7 +17,15 @@ then
     exit 1
 fi
 
+# raise exception of $1 is empty
+if [ -z "$2" ]
+then
+    echo "Parameter \$2 is empty"
+    exit 1
+fi
+
 echo "Password: $1"
+echo "Hostname: $2"
 
 # add user with password
 useradd -p $(openssl passwd -1 $1) blackstack
@@ -25,7 +34,7 @@ useradd -p $(openssl passwd -1 $1) blackstack
 usermod -aG sudo blackstack
 
 # change hostname
-hostname mp123
+hostname $2
 
 # edit /etc/ssh/sshd_config, enable the line "PasswordAuthentication yes"
 sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/g' /etc/ssh/sshd_config
