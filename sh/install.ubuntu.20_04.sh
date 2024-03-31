@@ -27,7 +27,7 @@ echo "Postgre Password: $2"
 # remember to run this script with sudo 
 echo 
 echo "remember to run this script with sudo"
-bash --login
+#bash --login
 echo "$1" | sudo  echo "HOLA!"
 
 # update packages
