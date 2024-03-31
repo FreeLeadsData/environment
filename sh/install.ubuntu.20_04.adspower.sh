@@ -35,22 +35,3 @@ sudo rm -rf ./chromedriver-linux64
 # AdsPower will try to use GTK, a graphical toolkit, which in turn needs an active display connection that is not present in a headless setup.
 sudo apt-get update
 sudo apt-get install -y xvfb
-
-#----------------------------------------------------------------
-
-# Find the location of adspower command
-#sudo apt -y --fix-broken install
-#sudo apt install -y apt-file
-#sudo apt-file update
-#apt-file search adspower_global
-
-# Reference:
-# - https://askubuntu.com/questions/1257275/boot-stuck-how-to-start-gui-from-the-command-line
-# 
-sudo apt-get install -y --reinstall ubuntu-desktop
-
-# start GUI from the command line, so I can run /usr/bin/adspower_global
-sudo systemctl start gdm3.service
-
-# start GKT GUI from the command line, so I can run /usr/bin/adspower_global
-sudo systemctl start gdm.service
