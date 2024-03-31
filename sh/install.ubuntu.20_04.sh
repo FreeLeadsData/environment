@@ -63,6 +63,8 @@ sudo echo "host all all" >> /etc/postgresql/12/main/pg_hba.conf
 # restart postgresql
 sudo systemctl restart postgresql.service
 
+echo ''
+echo 'BYE!'
 exit 0
 
 echo
