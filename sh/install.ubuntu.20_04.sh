@@ -236,6 +236,11 @@ echo "install xvfb"
 sudo apt-get update
 sudo apt-get install -y xvfb
 
+# write a flag in the file /home/blackstack/.blackstack
+echo
+echo "write a flag in the file /home/blackstack/.blackstack"
+touch /home/blackstack/.blackstack
+
 echo ''
 echo 'BYE!'
 exit 0
