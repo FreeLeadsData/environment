@@ -2,9 +2,12 @@
 # Description:
 # - This script is used to install the required packages for the BlackStack project.
 # Parameters:
-# - $1: linux user blackstack password
-# - $2: postgres user blackstack password
+# - $1: password for linux user blackstack, and postgres user blackstack either.
 #
+
+# remember to run this script with sudo 
+echo 
+echo "HOLA!"
 
 # raise exception of $1 is empty
 if [ -z "$1" ]
@@ -13,22 +16,28 @@ then
     exit 1
 fi
 
-echo "Linux Password: $1"
+echo "Password: $1"
 
-# raise exception of $1 is empty
-if [ -z "$2" ]
-then
-    echo "Parameter \$2 is empty"
-    exit 1
-fi
+# add user with password
+useradd -p $(openssl passwd -1 $1) blackstack
 
-echo "Postgre Password: $2"
+# add blackstack to sudoers
+usermod -aG sudo blackstack
 
-# remember to run this script with sudo 
-echo 
-echo "remember to run this script with sudo"
-#bash --login
-echo "$1" | sudo  echo "HOLA!"
+# change hostname
+hostname mp123
+
+# edit /etc/ssh/sshd_config, enable the line "PasswordAuthentication yes"
+sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+
+# restart ssh service
+service ssh restart
+
+# create home directory for blackstack
+mkdir /home/blackstack
+
+# grant ownership to blackstack
+chown blackstack:blackstack /home/blackstack
 
 # update packages
 echo
@@ -50,22 +59,21 @@ sudo apt install -y postgresql-12 postgresql-contrib
 sudo systemctl start postgresql.service
 sudo systemctl status postgresql
 
-# setup postgresql
-sudo -u postgres createuser -s -i -d -r -l -w blackstack
-sudo -u postgres psql -c "ALTER ROLE blackstack WITH PASSWORD '$2';"
 # edit /etc/postgresql/12/main/postgresql.sql: uncomment the line starting listen_addresses and set the velue listen_addresses='*'
 sudo sed -i 's/#listen_addresses/listen_addresses/g' /etc/postgresql/12/main/postgresql.conf
 sudo sed -i "s/listen_addresses = 'localhost'/listen_addresses = '*'/g" /etc/postgresql/12/main/postgresql.conf
 # grant edition rights to the user blackstack
 sudo chmod 777 /etc/postgresql/12/main/pg_hba.conf
 # edit /etc/postgresql/12/main/pg_hba.conf: add the line host all all
-sudo echo "host all all" >> /etc/postgresql/12/main/pg_hba.conf
+sudo echo "host all all 0.0.0.0/0   md5" >> /etc/postgresql/12/main/pg_hba.conf
 # restart postgresql
 sudo systemctl restart postgresql.service
-
-echo ''
-echo 'BYE!'
-exit 0
+# create postgresql user
+sudo -u postgres createuser -s -i -d -r -l -w blackstack
+# assign password to the user blackstack
+sudo -u postgres psql -c "ALTER ROLE blackstack WITH PASSWORD '$1';"
+# create new database called blackstack and owned by the user blackstack
+sudo -u postgres createdb -O blackstack blackstack
 
 echo
 echo "install required packages"
@@ -227,3 +235,7 @@ echo
 echo "install xvfb"
 sudo apt-get update
 sudo apt-get install -y xvfb
+
+echo ''
+echo 'BYE!'
+exit 0
