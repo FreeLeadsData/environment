@@ -28,25 +28,19 @@ echo "Hostname: $1"
 echo "Password: $2"
 
 # add user with password
-useradd -p $(openssl passwd -1 $2) blackstack
+useradd -p $(openssl passwd -1 "$2") blackstack -s /bin/bash -d /home/blackstack -m 
 
 # add blackstack to sudoers
 usermod -aG sudo blackstack
 
 # change hostname
-hostname $1
+hostname "$1"
 
 # edit /etc/ssh/sshd_config, enable the line "PasswordAuthentication yes"
 sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/g' /etc/ssh/sshd_config
 
 # restart ssh service
 service ssh restart
-
-# create home directory for blackstack
-mkdir /home/blackstack
-
-# grant ownership to blackstack
-chown blackstack:blackstack /home/blackstack
 
 # update packages
 echo
