@@ -6,6 +6,24 @@
 # - $2: postgres user blackstack password
 #
 
+# raise exception of $1 is empty
+if [ -z "$1" ]
+then
+    echo "Parameter \$1 is empty"
+    exit 1
+fi
+
+echo "Linux Password: $1"
+
+# raise exception of $1 is empty
+if [ -z "$2" ]
+then
+    echo "Parameter \$2 is empty"
+    exit 1
+fi
+
+echo "Postgre Password: $2"
+
 # remember to run this script with sudo 
 echo 
 echo "remember to run this script with sudo"
@@ -17,6 +35,33 @@ echo
 echo "update packages"
 sudo apt -y update
 sudo apt -y upgrade
+
+# backup old .postgresql folder
+echo
+echo "backup old .postgresql folder"
+sudo mv -p ~/.postgresql ~/.postgresql.$(date +%s) > /dev/null 2>&1
+sudo mkdir -p ~/.postgresql
+
+# install PostgreSQL dev package with header of PostgreSQL
+echo
+echo "install PostgreSQL dev package with header of PostgreSQL"
+sudo apt-get install -y libpq-dev
+sudo apt install -y postgresql-12 postgresql-contrib
+sudo systemctl start postgresql.service
+sudo systemctl status postgresql
+
+# setup postgresql
+sudo -u postgres createuser -s -i -d -r -l -w blackstack
+sudo -u postgres psql -c "ALTER ROLE blackstack WITH PASSWORD '$2';"
+# edit /etc/postgresql/12/main/postgresql.sql: uncomment the line starting listen_addresses and set the velue listen_addresses='*'
+sudo sed -i 's/#listen_addresses/listen_addresses/g' /etc/postgresql/12/main/postgresql.conf
+sudo sed -i "s/listen_addresses = 'localhost'/listen_addresses = '*'/g" /etc/postgresql/12/main/postgresql.conf
+# edit /etc/postgresql/12/main/pg_hba.conf: add the line host all all
+echo "host all all" >> /etc/postgresql/12/main/pg_hba.conf
+# restart postgresql
+sudo systemctl restart postgresql.service
+
+exit 0
 
 echo
 echo "install required packages"
@@ -33,20 +78,6 @@ sudo apt install -y curl
 echo
 echo "download cockroach CLI"
 curl https://binaries.cockroachdb.com/cockroach-v21.2.10.linux-amd64.tgz | tar -xz && sudo cp cockroach-v21.2.10.linux-amd64/cockroach /usr/local/bin/;
-
-# backup old .postgresql folder
-echo
-echo "backup old .postgresql folder"
-sudo mv -p ~/.postgresql ~/.postgresql.$(date +%s) > /dev/null 2>&1
-sudo mkdir -p ~/.postgresql
-
-# install PostgreSQL dev package with header of PostgreSQL
-echo
-echo "install PostgreSQL dev package with header of PostgreSQL"
-sudo apt-get install -y libpq-dev
-sudo apt install -y postgresql-12 postgresql-contrib
-sudo systemctl start postgresql.service
-sudo systemctl status postgresql
 
 # install bundler
 #echo
@@ -192,14 +223,3 @@ echo
 echo "install xvfb"
 sudo apt-get update
 sudo apt-get install -y xvfb
-
-# setup postgresql
-sudo -u postgres createuser -s -i -d -r -l -w blackstack
-sudo -u postgres psql -c "ALTER ROLE blackstack WITH PASSWORD '$2';"
-# edit /etc/postgresql/12/main/postgresql.sql: uncomment the line starting listen_addresses and set the velue listen_addresses='*'
-sudo sed -i 's/#listen_addresses/listen_addresses/g' /etc/postgresql/12/main/postgresql.conf
-sudo sed -i "s/listen_addresses = 'localhost'/listen_addresses = '*'/g" /etc/postgresql/12/main/postgresql.conf
-# edit /etc/postgresql/12/main/pg_hba.conf: add the line host all all
-echo "host all all" >> /etc/postgresql/12/main/pg_hba.conf
-# restart postgresql
-sudo systemctl restart postgresql.service
