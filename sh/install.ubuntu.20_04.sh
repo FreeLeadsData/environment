@@ -1,11 +1,15 @@
-# create a new user 'blackstack'
-#sudo adduser blackstack
+bash --login
+echo 'SantoBartolo101' | sudo -S echo "HOLA!"
 
-# add blackstack to sudoers
-#sudo usermod -aG sudo blackstack
+## -------------------------------------------
+sshpass -p "SantoBartolo101" ssh -l blackstack@89.116.25.250 
+sshpass -p "SantoBartolo101" ssh -o StrictHostKeyChecking=no blackstack@89.116.25.250 
+sshpass -p "SantoBartolo101" ssh -o StrictHostKeyChecking=no blackstack@89.116.25.250 'bash -s' < environment/sh/install.ubuntu.20_04.sh
 
-# switch to the new user
-#sudo su - blackstack
+## -------------------------------------------
+
+#bash --login
+#sudo sshpass -p "SantoBartolo101" su - blackstack
 
 # update packages
 echo
@@ -20,7 +24,6 @@ sudo apt install -y net-tools
 sudo apt install -y gnupg2
 sudo apt install -y nginx
 sudo apt install -y sshpass
-#sudo apt install -y xterm
 sudo apt install -y bc
 sudo apt install -y unzip
 sudo apt install -y curl
@@ -40,37 +43,37 @@ sudo mkdir -p ~/.postgresql
 echo
 echo "install PostgreSQL dev package with header of PostgreSQL"
 sudo apt-get install -y libpq-dev
-sudo apt install -y postgresql postgresql-contrib
+sudo apt install -y postgresql-12 postgresql-contrib
 sudo systemctl start postgresql.service
 sudo systemctl status postgresql
 
 # install bundler
-echo
-echo "install bundler"
-gem install bundler -v '2.3.7'
+#echo
+#echo "install bundler"
+#gem install bundler -v '2.3.7'
 
 # Install Google Chrome
 # Reference:
 # - https://skolo.online/documents/webscrapping/#step-1-download-chrome
 #
-echo
-echo "install chrome"
-wget http://mirror.cs.uchicago.edu/google-chrome/pool/main/g/google-chrome-stable/google-chrome-stable_114.0.5735.90-1_amd64.deb
-sudo dpkg -i google-chrome-stable_114.0.5735.90-1_amd64.deb
-sudo apt-get install -fy
-google-chrome --version
+#echo
+#echo "install chrome"
+#wget http://mirror.cs.uchicago.edu/google-chrome/pool/main/g/google-chrome-stable/google-chrome-stable_114.0.5735.90-1_amd64.deb
+#sudo dpkg -i google-chrome-stable_114.0.5735.90-1_amd64.deb
+#sudo apt-get install -fy
+#google-chrome --version
 
 # Install Chrome Driver
 # Reference:
 # - https://stackoverflow.com/questions/50642308/webdriverexception-unk
 #
-echo
-echo "install chrome-driver"
-wget https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
-unzip chromedriver_linux64.zip
-sudo mv chromedriver /usr/bin/chromedriver
-sudo chown blackstack:blackstack /usr/bin/chromedriver
-sudo chmod +x /usr/bin/chromedriver
+#echo
+#echo "install chrome-driver"
+#wget https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
+#unzip chromedriver_linux64.zip
+#sudo mv chromedriver /usr/bin/chromedriver
+#sudo chown root:root /usr/bin/chromedriver
+#sudo chmod +x /usr/bin/chromedriver
 
 # install git
 echo
@@ -98,14 +101,14 @@ sudo bash rvm.sh
 #
 # reference: https://unix.stackexchange.com/questions/102678/making-ruby-available-to-all-users
 #
-sudo usermod -a -G rvm blackstack
+sudo usermod -a -G rvm root
 
 # To start using RVM you need to run `source /etc/profile.d/rvm.sh` in all your open shell windows,
 # Fix the issue "RVM is not a function"
 # reference: https://stackoverflow.com/questions/9336596/rvm-installation-not-working-rvm-is-not-a-function
 echo
 echo "Run RVM script"
-#source /home/blackstack/.rvm/scripts/rvm
+#source /home/root/.rvm/scripts/rvm
 #source /usr/local/rvm/scripts/rvm
 source /etc/profile.d/rvm.sh
 type rvm | head -n 1 # if you read "rvm is a function, that means the installation is fine.
@@ -136,10 +139,10 @@ ruby -v
 # - https://stackoverflow.com/questions/22917453/why-need-to-define-source-to-rvm-every-time
 # - https://stackoverflow.com/questions/4842566/rvm-command-source-rvm-scripts-rvm?rq=1 
 # 
-echo
-echo "Source RVM on login"
-echo "source /etc/profile.d/rvm.sh" >> ~/.bashrc
-echo "rvm --default use 3.1.2" >> ~/.bashrc
+#echo
+#echo "Source RVM on login"
+#echo "source /etc/profile.d/rvm.sh" >> ~/.bashrc
+#echo "rvm --default use 3.1.2" >> ~/.bashrc
 
 # create the code directory
 echo
@@ -190,3 +193,16 @@ echo
 echo "install xvfb"
 sudo apt-get update
 sudo apt-get install -y xvfb
+
+# setup postgresql
+useradd -m postgres
+cd /home/postgres
+sudo -u postgres createuser -s -i -d -r -l -w blackstack
+sudo -u postgres psql -c "ALTER ROLE blackstack WITH PASSWORD 'mysecretpassword';"
+# edit /etc/postgresql/12/main/postgresql.sql: uncomment the line starting listen_addresses and set the velue listen_addresses='*'
+sudo sed -i 's/#listen_addresses/listen_addresses/g' /etc/postgresql/12/main/postgresql.conf
+sudo sed -i "s/listen_addresses = 'localhost'/listen_addresses = '*'/g" /etc/postgresql/12/main/postgresql.conf
+# edit /etc/postgresql/12/main/pg_hba.conf: add the line host all all
+sudo echo "host all all" >> /etc/postgresql/12/main/pg_hba.conf
+# restart postgresql
+sudo systemctl restart postgresql.service
