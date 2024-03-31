@@ -115,7 +115,7 @@ And then run this **postgres** command to assign a new password to the **blackst
 ### 4.3. Edit `postgresql.conf`
 
 ```bash
-cd /etc/postgresql/9.x/main/
+cd /etc/postgresql/12/main/
 ```
 
 Open file named `postgresql.conf`,

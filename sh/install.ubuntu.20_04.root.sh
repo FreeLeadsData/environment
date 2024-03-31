@@ -181,3 +181,15 @@ echo
 echo "install xvfb"
 sudo apt-get update
 sudo apt-get install -y xvfb
+
+
+# setup postgresql
+sudo -u postgres createuser -s -i -d -r -l -w blackstack
+sudo -u postgres psql -c "ALTER ROLE blackstack WITH PASSWORD 'mysecretpassword';"
+# edit /etc/postgresql/12/main/postgresql.sql: uncomment the line starting listen_addresses and set the velue listen_addresses='*'
+sudo sed -i 's/#listen_addresses/listen_addresses/g' /etc/postgresql/12/main/postgresql.conf
+sudo sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/g" /etc/postgresql/12/main/postgresql.conf
+# edit /etc/postgresql/12/main/pg_hba.conf: add the line host all all
+sudo echo "host all all" >> /etc/postgresql/12/main/pg_hba.conf
+# restart postgresql
+sudo systemctl restart postgresql.service
