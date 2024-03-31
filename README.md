@@ -73,12 +73,6 @@ Anyone of the installation scripts listed below should run from the `blackstack`
 
 **IMPORTANT:** When the script has been done, log out SSH and access again to run the `profile.d` and get Ruby working.
 
-**Ubunto 18.04:**
-
-```bash
-wget https://raw.githubusercontent.com/leandrosardi/environment/main/sh/install.ubuntu.18_04.sh -O - | bash
-```
-
 **Ubunto 20.04:**
 
 ```bash
