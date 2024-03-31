@@ -146,3 +146,29 @@ echo
 echo "create the code directory"
 mkdir -p ~/code
 cd ~/code
+
+# Install Chrome Driver
+# Reference:
+# - https://stackoverflow.com/questions/50642308/webdriverexception-unk
+#
+sudo wget https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/116.0.5845.96/linux64/chromedriver-linux64.zip
+sudo chmod 777 chromedriver-linux64.zip
+unzip chromedriver-linux64.zip
+sudo mv chromedriver-linux64/* /usr/bin
+sudo chown root:root /usr/bin/chromedriver
+sudo chmod +x /usr/bin/chromedriver
+sudo rm -rf ./chromedriver-linux64.zip
+sudo rm -rf ./chromedriver-linux64
+
+# Install AdsPower
+wget https://version.adspower.net/software/linux-x64-global/AdsPower-Global-5.9.14-x64.deb
+sudo chmod 777 AdsPower-Global-5.9.14-x64.deb
+sudo dpkg -i AdsPower-Global-5.9.14-x64.deb
+sudo apt install -y ./AdsPower-Global-5.9.14-x64.deb
+sudo rm -rf ./AdsPower-Global-5.9.14-x64.deb
+
+# Find the location of adspower command
+sudo apt --fix-broken install
+sudo apt-get install -y apt-file
+sudo apt-file update
+apt-file search adspower
