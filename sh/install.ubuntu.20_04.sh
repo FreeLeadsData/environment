@@ -28,7 +28,7 @@ echo "Postgre Password: $2"
 echo 
 echo "remember to run this script with sudo"
 bash --login
-echo "$1" | sudo -S echo "HOLA!"
+echo "$1" | sudo  echo "HOLA!"
 
 # update packages
 echo
@@ -56,8 +56,10 @@ sudo -u postgres psql -c "ALTER ROLE blackstack WITH PASSWORD '$2';"
 # edit /etc/postgresql/12/main/postgresql.sql: uncomment the line starting listen_addresses and set the velue listen_addresses='*'
 sudo sed -i 's/#listen_addresses/listen_addresses/g' /etc/postgresql/12/main/postgresql.conf
 sudo sed -i "s/listen_addresses = 'localhost'/listen_addresses = '*'/g" /etc/postgresql/12/main/postgresql.conf
+# grant edition rights to the user blackstack
+sudo chmod 777 /etc/postgresql/12/main/pg_hba.conf
 # edit /etc/postgresql/12/main/pg_hba.conf: add the line host all all
-echo "host all all" >> /etc/postgresql/12/main/pg_hba.conf
+sudo echo "host all all" >> /etc/postgresql/12/main/pg_hba.conf
 # restart postgresql
 sudo systemctl restart postgresql.service
 
