@@ -2,6 +2,12 @@
 
 Script for installing the environment for any of our projects on **fresh** servers running **Ubuntu 20.04**.
 
+**Outline:**
+
+1. [Getting Started](#1-getting-started).
+2. [Installation Details](#2-installation-details).
+3. [Troubleshooting](#3-troubleshooting)
+
 ## 1. Getting Started
 
 First, download the installation script.
@@ -23,6 +29,8 @@ bash install.ubuntu.20_04.sh <hostname> <password>
 3. After the installation, you should access the server with the `blackstack` user only.
 4. The user to access PostgreSQL is called `blackstack`, and its password is the one provided in the command line.
 5. In the PostgreSQL server, will be a database called `blackstack`, owner by the `blackstack` user.
+
+## 2. Installation Details
 
 **The following major packages will be installed:**
 
@@ -47,7 +55,7 @@ bash install.ubuntu.20_04.sh <hostname> <password>
 - unzip
 - curl
 
-## 2. Troubleshooting
+## 3. Troubleshooting
 
 While the steps above work perfectly with [Contabo](https://contabo.com), [AWS](https://aws.amazon.com) has some problems.
 
