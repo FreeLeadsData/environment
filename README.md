@@ -4,8 +4,8 @@ Script for installing the environment for any of our projects on **fresh** serve
 
 **Outline:**
 
-1. [Getting Started](#1-getting-started).
-2. [Installation Details](#2-installation-details).
+1. [Getting Started](#1-getting-started)
+2. [Installation Details](#2-installation-details)
 3. [Troubleshooting](#3-troubleshooting)
 
 ## 1. Getting Started
