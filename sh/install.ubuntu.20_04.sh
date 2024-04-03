@@ -27,26 +27,41 @@ fi
 echo "Hostname: $1"
 echo "Password: $2"
 
+# Set GTM-3 timezone
+echo
+echo "Set GTM-3 timezone"
+timedatectl set-timezone "America/Argentina/Buenos_Aires" > /dev/null 2>&1 
+
 # add user with password
-useradd -p $(openssl passwd -1 "$2") blackstack -s /bin/bash -d /home/blackstack -m 
+echo
+echo "Add user blackstack with password ***"
+useradd -p $(openssl passwd -1 "$2") blackstack -s /bin/bash -d /home/blackstack -m > /dev/null 2>&1  
 
 # add blackstack to sudoers
-usermod -aG sudo blackstack
+echo
+echo "Add blackstack to sudoers"
+usermod -aG sudo blackstack > /dev/null 2>&1 
 
 # change hostname
-hostname "$1"
+echo
+echo "Change hostname"
+hostname "$1" > /dev/null 2>&1 
 
 # edit /etc/ssh/sshd_config, enable the line "PasswordAuthentication yes"
-sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+echo
+echo "Edit /etc/ssh/sshd_config, enable the line PasswordAuthentication yes"
+sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/g' /etc/ssh/sshd_config > /dev/null 2>&1 
 
 # restart ssh service
-service ssh restart
+echo
+echo "Restart ssh service"
+service ssh restart > /dev/null 2>&1 
 
 # update packages
 echo
 echo "update packages"
-sudo apt -y update
-sudo apt -y upgrade
+sudo apt -y update > /dev/null 2>&1 
+sudo apt -y upgrade > /dev/null 2>&1 
 
 # backup old .postgresql folder
 echo
