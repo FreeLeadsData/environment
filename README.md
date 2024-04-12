@@ -1,6 +1,8 @@
 # Environment
 
-Script for installing the environment for any of our projects on **fresh** servers running **Ubuntu 20.04**.
+This is our **Environment Installation Script** (or simply **EIS**) for running any of our projects.
+
+So far, the EIS works fine on **fresh** servers running **Ubuntu 20.04** only.
 
 **Outline:**
 
