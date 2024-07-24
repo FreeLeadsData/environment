@@ -45,7 +45,7 @@ bash install.ubuntu.20_04.sh <hostname> <password>
 - RVM (latest version)
 - Ruby 3.1.2
 
-**Other minor mackages are:**
+**Other minor packages are:**
 
 - xvfb
 - jq
