@@ -103,6 +103,7 @@ sudo apt install -y sshpass
 sudo apt install -y bc
 sudo apt install -y unzip
 sudo apt install -y curl
+sudo apt-get -y install certbot
 
 # install cockroach CLI for local development environments
 echo
