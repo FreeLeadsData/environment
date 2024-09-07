@@ -7,29 +7,29 @@
 #
 
 # Set GTM-3 timezone
-timedatectl set-timezone "America/Argentina/Buenos_Aires" > /dev/null 2>&1 
+timedatectl set-timezone "America/Argentina/Buenos_Aires" 
 
 # add user with password
-useradd -p $(openssl passwd -1 "$2") blackstack -s /bin/bash -d /home/blackstack -m > /dev/null 2>&1  
+useradd -p $(openssl passwd -1 "$2") blackstack -s /bin/bash -d /home/blackstack -m  
 
 # add blackstack to sudoers
-usermod -aG sudo blackstack > /dev/null 2>&1 
+usermod -aG sudo blackstack 
 
 # change hostname
-hostname "$1" > /dev/null 2>&1 
+hostname "$1" 
 
 # edit /etc/ssh/sshd_config, enable the line "PasswordAuthentication yes"
-sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/g' /etc/ssh/sshd_config > /dev/null 2>&1 
+sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/g' /etc/ssh/sshd_config 
 
 # restart ssh service
-service ssh restart > /dev/null 2>&1 
+service ssh restart 
 
 # update packages
-sudo apt -y update > /dev/null 2>&1 
-sudo apt -y upgrade > /dev/null 2>&1 
+sudo apt -y update 
+sudo apt -y upgrade 
 
 # backup old .postgresql folder
-sudo mv -p ~/.postgresql ~/.postgresql.$(date +%s) > /dev/null 2>&1
+sudo mv -p ~/.postgresql ~/.postgresql.$(date +%s)
 sudo mkdir -p ~/.postgresql
 
 # install PostgreSQL dev package with header of PostgreSQL
@@ -66,34 +66,6 @@ sudo apt-get -y install certbot
 
 # install cockroach CLI for local development environments
 curl https://binaries.cockroachdb.com/cockroach-v21.2.10.linux-amd64.tgz | tar -xz && sudo cp cockroach-v21.2.10.linux-amd64/cockroach /usr/local/bin/;
-
-# install bundler
-#echo
-#echo "install bundler"
-#gem install bundler -v '2.3.7'
-
-# Install Google Chrome
-# Reference:
-# - https://skolo.online/documents/webscrapping/#step-1-download-chrome
-#
-#echo
-#echo "install chrome"
-#wget http://mirror.cs.uchicago.edu/google-chrome/pool/main/g/google-chrome-stable/google-chrome-stable_114.0.5735.90-1_amd64.deb
-#sudo dpkg -i google-chrome-stable_114.0.5735.90-1_amd64.deb
-#sudo apt-get install -fy
-#google-chrome --version
-
-# Install Chrome Driver
-# Reference:
-# - https://stackoverflow.com/questions/50642308/webdriverexception-unk
-#
-#echo
-#echo "install chrome-driver"
-#wget https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
-#unzip chromedriver_linux64.zip
-#sudo mv chromedriver /usr/bin/chromedriver
-#sudo chown blackstack:blackstack /usr/bin/chromedriver
-#sudo chmod +x /usr/bin/chromedriver
 
 # install git
 sudo apt install -y git
