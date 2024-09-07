@@ -255,6 +255,10 @@ echo "install xvfb"
 sudo apt-get update
 sudo apt-get install -y xvfb
 
+# allow adspower browsers and any other process to execute `downloadImage` javascript function.
+sudo chmod 777 /home/blackstack/Downloads
+sudo chmod 777 /home/blackstack/.config/adspower_global/cwd_global
+
 # write a flag in the file /home/blackstack/.blackstack
 echo
 echo "write a flag in the file /home/blackstack/.blackstack"
