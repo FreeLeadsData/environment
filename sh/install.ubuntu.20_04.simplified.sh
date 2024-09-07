@@ -108,16 +108,6 @@ rvm --default use 3.1.2
 # check ruby installed
 ruby -v
 
-# fix: why need to define source to RVM every time
-# references: 
-# - https://stackoverflow.com/questions/22917453/why-need-to-define-source-to-rvm-every-time
-# - https://stackoverflow.com/questions/4842566/rvm-command-source-rvm-scripts-rvm?rq=1 
-# 
-#echo
-#echo "Source RVM on login"
-#echo "source /etc/profile.d/rvm.sh" >> ~/.bashrc
-#echo "rvm --default use 3.1.2" >> ~/.bashrc
-
 # create the code directory
 mkdir -p ~/code
 cd ~/code
