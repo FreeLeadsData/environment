@@ -190,6 +190,9 @@ echo
 echo "set 3.1.2 as default Ruby version"
 rvm --default use 3.1.2
 
+# add these the sourcing of Ruby into ~/.bashrc
+echo -e "\nsource /etc/profile.d/rvm.sh\nrvm --default use 3.1.2" >> ~/.bashrc
+
 # check ruby installed
 echo
 echo "Try Ruby"
